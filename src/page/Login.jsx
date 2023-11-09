@@ -8,7 +8,7 @@ const Login = () => {
     const [password,setPassword] = useState();
   return (
     <>
-        <div className="signin-wrap md:w-1/3 w-full mx-auto flex flex-col items-center bg-slate-200 rounded mt-20 px-20 py-5 gap-4">
+        <div className="signin-wrap lg:w-1/3 md:w-1/2 w-[90%] mx-auto flex flex-col items-center bg-slate-200 rounded mt-20 md:px-16 px-2 py-5 gap-4 ">
             <p className='text-2xl mb-4'>Login</p>
             <TextField
               id="username"
