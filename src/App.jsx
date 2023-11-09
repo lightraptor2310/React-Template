@@ -3,7 +3,7 @@ function App() {
 
   return (
     <>
-      <p className=" text-center">hello</p>
+      <p className=" text-center">hello test router</p>
     </>
   )
 }
