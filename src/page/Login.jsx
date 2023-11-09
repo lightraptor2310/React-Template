@@ -33,7 +33,7 @@ const Login = () => {
             <Button type='submit' variant="contained" color="primary" fullWidth>
               Login
             </Button>
-            <Link href="#" variant="body2">
+            <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
             </Link>
         </div>

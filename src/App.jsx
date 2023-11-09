@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 
 function App() {
   const list_button = [
-    {name: 'login', value : 'login'}
+    {name: 'login', value : 'login'}, 
+    {name: 'signup', value: 'signup'}
   ]
   return (
     <>
