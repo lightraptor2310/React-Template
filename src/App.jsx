@@ -1,9 +1,10 @@
 import {Button} from '@mui/material'
+import { Link } from 'react-router-dom'
 
 
 function App() {
   const list_button = [
-    {name: 'login', value : '/login'}
+    {name: 'login', value : 'login'}
   ]
   return (
     <>
@@ -14,7 +15,7 @@ function App() {
         {list_button.map((item)=>
           
           <Button variant="outlined" color="primary" href={`${item.value}`}>
-            {item.name}
+            <Link to={`${item.value}`} > {item.name} </Link>
           </Button>
       )}
       </div>
