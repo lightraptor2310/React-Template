@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { Link } from '@mui/material';
-import BackToHome from '../component/BackToHome';
+import BackToHome from '../components/BackToHome';
 
 const Login = () => {
     const [username,setUsername] = useState();
