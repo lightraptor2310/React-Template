@@ -4,6 +4,7 @@ import {
   Badge,
   Box,
   InputBase,
+  Link,
   Menu,
   MenuItem,
   Toolbar,
@@ -11,9 +12,10 @@ import {
   styled,
 } from "@mui/material";
 import React, { useState } from "react";
-import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
-import { Mail, Notifications } from "@mui/icons-material";
-
+import MenuIcon from '@mui/icons-material/Menu';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { reactLocalStorage } from "reactjs-localstorage";
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -27,57 +29,39 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const Icons = styled(Box)(({ theme }) => ({
-  display: "none",
-  gap: "20px",
-  alignItems: "center",
-  [theme.breakpoints.up("sm")]: {
-    display: "flex",
-  },
-}));
-
-const IconBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  gap: "10px",
+  gap: "20px",
   alignItems: "center",
   [theme.breakpoints.up("sm")]: {
     display: "none",
   },
 }));
 
-const Navbar = () => {
+const IconBox = styled(Box)(({ theme }) => ({
+  display: "none",
+  gap: "10px",
+  alignItems: "center",
+  [theme.breakpoints.up("sm")]: {
+    display: "flex",
+  },
+}));
+
+const Navbar = ({id}) => {
     const [openMenu, setOpenMenu] = useState(false)
   return (
     <AppBar position="sticky">
       <StyledToolbar>
         <Typography
           variant="h6"
-          sx={{
-            display: {
-              sm: "block",
-              xs: "none",
-            },
-          }}
+          className="md:block hidden"
         >
           E-learning
         </Typography>
-        <LocalFireDepartmentIcon
-          sx={{
-            display: {
-              sm: "none",
-              xs: "block",
-            },
-          }}
-        ></LocalFireDepartmentIcon>
+        <FontAwesomeIcon icon={faBars} className="md:hidden block scale-150"/>
         <Search>
           <InputBase placeholder="search..." />
         </Search>
         <Icons>
-          <Badge badgeContent={4} color="error">
-            <Mail></Mail>
-          </Badge>
-          <Badge badgeContent={2} color="error">
-            <Notifications></Notifications>
-          </Badge>
           <Avatar
             sx={{ width: "30px", height: "30px" }}
             src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t39.30808-6/397965008_3709908259254274_3900916591313818123_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ZQt8JBW205cAX80i25Q&_nc_ht=scontent.fsgn16-1.fna&oh=00_AfCuUEz_LPFkNbaN05nZW7WScoKbZwmkMJmrTSI2hSjATg&oe=6554313B"
@@ -89,7 +73,7 @@ const Navbar = () => {
             sx={{ width: "30px", height: "30px" }}
             src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t39.30808-6/397965008_3709908259254274_3900916591313818123_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ZQt8JBW205cAX80i25Q&_nc_ht=scontent.fsgn16-1.fna&oh=00_AfCuUEz_LPFkNbaN05nZW7WScoKbZwmkMJmrTSI2hSjATg&oe=6554313B"
           />
-          <Typography variant="span">Kinh khủng</Typography>
+          <Typography variant="span">{id}</Typography>
         </IconBox>
       </StyledToolbar>
       <Menu
@@ -106,9 +90,7 @@ const Navbar = () => {
           horizontal: "right",
         }}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem><Link href="/login" onClick={reactLocalStorage.remove('id')} sx={{textDecoration: 'none', color: 'black'}}>Logout</Link></MenuItem>
       </Menu>
     </AppBar>
   );

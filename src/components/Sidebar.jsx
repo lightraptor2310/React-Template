@@ -21,18 +21,8 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <Box
-      flex={1}
-      p={2}
-      sx={{
-        display: {
-          xs: "none",
-          sm: "block",
-        },
-        width:'25%',
-      }}
-    >
-     <Box position={`fixed`}>
+    <div className="lg:w-1/4 md:w-2/5 md:flex hidden p-2">
+      <Box position={`fixed`}>
      <List>
         <ListItem disablePadding>
           <ListItemButton LinkComponent={`a`} href="#">
@@ -84,7 +74,8 @@ const Sidebar = () => {
         </ListItem>
       </List>
      </Box>
-    </Box>
+    </div>
+
   );
 };
 
