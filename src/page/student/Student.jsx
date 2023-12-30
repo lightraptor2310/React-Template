@@ -1,43 +1,59 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Stack } from '@mui/material'
-import Navbar from '../../components/Navbar'
-import Sidebar from '../../components/Sidebar'
-import ListCourse from './ListCourse'
-import { reactLocalStorage } from 'reactjs-localstorage'
-import Rightbar from '../../components/Rightbar'
-import axios from 'axios'
-import StudentHome from './StudentHome'
-import { Navigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Box, Stack } from '@mui/material';
+import Navbar from '../../components/Navbar';
+import Sidebar from '../../components/Sidebar';
+import Rightbar from '../../components/Rightbar';
+import axios from 'axios';
+import StudentHome from './StudentHome';
+import { Navigate } from 'react-router-dom';
+import { getStudentData } from '../../utils/getData';
+import { reactLocalStorage } from 'reactjs-localstorage';
 const Student = () => {
-  
-  const [correct,setCorrect] = useState(reactLocalStorage.get('id') ? true : false);
-  const login = reactLocalStorage.get('id')
-  const id = 20520467
+  const [loggedInUserId, setLoggedInUserId] = useState(reactLocalStorage.get('user'));
+  const type = reactLocalStorage.get('type');
+  const [correct, setCorrect] = useState(!!loggedInUserId);
   const [data, setData] = useState();
-  const getStudent = async ()=> {
-    const response = await axios.get(`https://flask-database.vercel.app/home/${login}`)
-    console.log(response.data);
-    setData(response.data);
-  }
+
+  console.log(loggedInUserId);
+  console.log(type);
+  const fetchData = async () => {
+    try {
+      const studentData = await getStudentData(loggedInUserId);
+      setData(studentData);
+    } catch (error) {
+      // Handle error as needed
+    }
+  };
+
   useEffect(() => {
-    
-      getStudent();
-  },[]);
-  if(!correct) {
-    return <Navigate to={'/login'}/>
+    // Ensure that correct is updated before calling fetchData
+    if (correct) {
+      fetchData();
+      
+    }
+  }, [correct]);
+
+  useEffect(() => {
+    // Additional useEffect to update correct when loggedInUserId changes
+    setCorrect(!!loggedInUserId);
+  }, [loggedInUserId]);
+
+  if (!correct) {
+    return <Navigate to={'/login'} />;
   }
+
   return (
     <>
-    <Box>
-    <Navbar id={data?.TenSV[0]}/>
-    <Stack direction={`row`} spacing={2}>
-      <Sidebar/>
-      <StudentHome list={data?.MonHoc}/>
-      <Rightbar/>
-    </Stack>
-    </Box>
-   </>
-  )
-}
+      <Box>
+        <Navbar id={data?.TenSV?.[0]} />
+        <Stack direction={`row`} spacing={2}>
+          <Sidebar />
+          <StudentHome />
+          <Rightbar />
+        </Stack>
+      </Box>
+    </>
+  );
+};
 
-export default Student
+export default Student;

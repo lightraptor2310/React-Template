@@ -90,7 +90,7 @@ const Navbar = ({id}) => {
           horizontal: "right",
         }}
       >
-        <MenuItem><Link href="/login" onClick={reactLocalStorage.remove('id')} sx={{textDecoration: 'none', color: 'black'}}>Logout</Link></MenuItem>
+        <MenuItem><Link href="/login" onClick={()=>{reactLocalStorage.remove('user')}} sx={{textDecoration: 'none', color: 'black'}}>Logout</Link></MenuItem>
       </Menu>
     </AppBar>
   );
