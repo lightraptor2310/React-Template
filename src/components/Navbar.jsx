@@ -5,6 +5,11 @@ import {
   Box,
   InputBase,
   Link,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Toolbar,
@@ -12,10 +17,10 @@ import {
   styled,
 } from "@mui/material";
 import React, { useState } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { Article, Assignment, Home, MenuBook, Person, Settings } from "@mui/icons-material";
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -37,6 +42,7 @@ const Icons = styled(Box)(({ theme }) => ({
   },
 }));
 
+
 const IconBox = styled(Box)(({ theme }) => ({
   display: "none",
   gap: "10px",
@@ -45,8 +51,153 @@ const IconBox = styled(Box)(({ theme }) => ({
     display: "flex",
   },
 }));
+const Navbar = ({id,type}) => {
+  const [open,setOpen] = useState();
+  
+  
+  const toggle = () => {
+    setOpen((e)=>(e=!open))
+  }
+  return (
+    <>
+      <NavbarMenu id={id} toggle={toggle}/>
+      <SideBarMenu open={open} toggle={toggle} type={type} id={id}/>
+    </>
+  )
+}
 
-const Navbar = ({id}) => {
+const SideBarMenu = ({open,toggle,type,id}) => {
+  const navStudent = [
+    {
+      text: "Trang chủ",
+      link: "",
+      icon: <Home />
+    },
+    {
+      text: "Môn học",
+      link: `subject/${id}`,
+      icon: <Article />
+    },
+    {
+      text: "Cài đặt",
+      link: "setting",
+      icon: <Settings />
+    },
+    {
+      text: "Thông tin cá nhân",
+      link: `${id}`,
+      icon: <Person />
+    },
+  ]
+  const navTeacher = [
+    {
+      text: "Trang Chủ",
+      link: "",
+      icon: <Home />
+    },
+    {
+      text: "Quản Lí Môn Học",
+      link: `subject/${id}`,
+      icon: <Article />
+    },
+    {
+      text: "Cài Đặt",
+      link: "setting",
+      icon: <Settings />
+    },
+    {
+      text: "Thông Tin Cá Nhân",
+      link: `${id}`,
+      icon: <Person />
+    },
+  ]
+  const navParent = [
+    {
+      text: "Trang Chủ",
+      link: "",
+      icon: <Home />
+    },
+    {
+      text: "Quản Lí Học Sinh",
+      link: `student/${id}`,
+      icon: <Assignment />
+    },
+    {
+      text: "Môn học hôm nay",
+      link: `subject/${id}`,
+      icon: <MenuBook />
+    }
+    ,
+    {
+      text: "Cài Đặt",
+      link: "setting",
+      icon: <Settings />
+    },
+    {
+      text: "Thông Tin Cá Nhân",
+      link: `${id}`,
+      icon: <Person />
+    },
+  ]
+  return (
+    <div
+    className="sidebar-containder fixed w-full h-full overflow-hidden bg-white grid pt-[60px] left-0 z-10"
+    style={{
+      opacity: `${open ? "1" : "0"}`,
+      top: `${open ? "0%" : "-100%"}`,
+      transition: `0.3s`
+    }}
+    >
+      {
+      type === "sv" && 
+      <List>
+      {navStudent.map((item, index) => (
+        <ListItem disablePadding key={index}>
+          <ListItemButton LinkComponent={`a`} href={`/student/${item.link}`}>
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+
+    </List>
+     }
+     {
+      type === "gv" && 
+      <List>
+      {navTeacher.map((item, index) => (
+        <ListItem disablePadding key={index}>
+          <ListItemButton LinkComponent={`a`} href={`/teacher/${item.link}`}>
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
+     }
+     {
+      type === "ph" && 
+      <List>
+      {navParent.map((item,index) => (
+        <ListItem disablePadding key={index}>
+          <ListItemButton LinkComponent={`a`} href={`/parent/${item.link}`}>
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
+     }
+    </div>
+  )
+}
+const NavbarMenu = ({id,toggle}) => {
     const [openMenu, setOpenMenu] = useState(false)
   return (
     <AppBar position="sticky">
@@ -57,7 +208,7 @@ const Navbar = ({id}) => {
         >
           E-learning
         </Typography>
-        <FontAwesomeIcon icon={faBars} className="md:hidden block scale-150"/>
+        <FontAwesomeIcon onClick={()=> toggle()}  icon={faBars} className="md:hidden block scale-150 cursor-pointer"/>
         <Search>
           <InputBase placeholder="search..." />
         </Search>
@@ -90,7 +241,7 @@ const Navbar = ({id}) => {
           horizontal: "right",
         }}
       >
-        <MenuItem><Link href="/login" onClick={()=>{reactLocalStorage.remove('user')}} sx={{textDecoration: 'none', color: 'black'}}>Logout</Link></MenuItem>
+        <MenuItem><Link href="/login" onClick={()=>{reactLocalStorage.remove('user'); reactLocalStorage.remove('type');}} sx={{textDecoration: 'none', color: 'black'}}>Logout</Link></MenuItem>
       </Menu>
     </AppBar>
   );

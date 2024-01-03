@@ -16,63 +16,136 @@ import {
   Settings,
   AccountBox,
   ModeNight,
+  Assignment,
+  MenuBook
 } from "@mui/icons-material";
 import React from "react";
 
-const Sidebar = () => {
+
+
+const Sidebar = ({type,id}) => {
+  console.log("id = " +id);
+  const navStudent = [
+    {
+      text: "Trang chủ",
+      link: "",
+      icon: <Home />
+    },
+    {
+      text: "Môn học",
+      link: `subject/${id}`,
+      icon: <Article />
+    },
+    {
+      text: "Cài đặt",
+      link: "setting",
+      icon: <Settings />
+    },
+    {
+      text: "Thông tin cá nhân",
+      link: `${id}`,
+      icon: <Person />
+    },
+  ]
+  const navTeacher = [
+    {
+      text: "Trang Chủ",
+      link: "",
+      icon: <Home />
+    },
+    {
+      text: "Quản Lí Môn Học",
+      link: `subject/${id}`,
+      icon: <Article />
+    },
+    {
+      text: "Cài Đặt",
+      link: "setting",
+      icon: <Settings />
+    },
+    {
+      text: "Thông Tin Cá Nhân",
+      link: `${id}`,
+      icon: <Person />
+    },
+  ]
+  const navParent = [
+    {
+      text: "Trang Chủ",
+      link: "",
+      icon: <Home />
+    },
+    {
+      text: "Quản Lí Học Sinh",
+      link: `student/${id}`,
+      icon: <Assignment />
+    },
+    {
+      text: "Môn học hôm nay",
+      link: `subject/${id}`,
+      icon: <MenuBook />
+    }
+    ,
+    {
+      text: "Cài Đặt",
+      link: "setting",
+      icon: <Settings />
+    },
+    {
+      text: "Thông Tin Cá Nhân",
+      link: `${id}`,
+      icon: <Person />
+    },
+  ]
   return (
     <div className="lg:w-1/4 md:w-2/5 md:flex hidden p-2">
       <Box position={`fixed`}>
-     <List>
-        <ListItem disablePadding>
-          <ListItemButton LinkComponent={`a`} href="#">
+     {
+      type === "sv" && 
+      <List>
+      {navStudent.map((item, index) => (
+        <ListItem disablePadding key={index}>
+          <ListItemButton LinkComponent={`a`} href={`/student/${item.link}`}>
             <ListItemIcon>
-              <Home />
+              {item.icon}
             </ListItemIcon>
-            <ListItemText primary="Trang chủ" />
+            <ListItemText primary={item.text} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton LinkComponent={`a`} href="#">
+      ))}
+
+    </List>
+     }
+     {
+      type === "gv" && 
+      <List>
+      {navTeacher.map((item, index) => (
+        <ListItem disablePadding key={index}>
+          <ListItemButton LinkComponent={`a`} href={`/teacher/${item.link}`}>
             <ListItemIcon>
-              <Article />
+              {item.icon}
             </ListItemIcon>
-            <ListItemText primary="Khóa học" />
+            <ListItemText primary={item.text} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton LinkComponent={`a`} href="#">
+      ))}
+    </List>
+     }
+     {
+      type === "ph" && 
+      <List>
+      {navParent.map((item,index) => (
+        <ListItem disablePadding key={index}>
+          <ListItemButton LinkComponent={`a`} href={`/parent/${item.link}`}>
             <ListItemIcon>
-              <Group />
+              {item.icon}
             </ListItemIcon>
-            <ListItemText primary="Lớp học" />
+            <ListItemText primary={item.text} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton LinkComponent={`a`} href="#">
-            <ListItemIcon>
-            <Settings />
-            </ListItemIcon>
-            <ListItemText primary="Cài đặt" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton LinkComponent={`a`} href="#">
-            <ListItemIcon>
-              <Person />
-            </ListItemIcon>
-            <ListItemText primary="Thông tin cá nhân" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton LinkComponent={`a`} href="#">
-            <ListItemIcon>
-              <ModeNight />
-            </ListItemIcon>
-            <Switch />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      ))}
+    </List>
+     }
      </Box>
     </div>
 

@@ -10,6 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
+  const [type, setType] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -30,6 +31,7 @@ const Login = () => {
         reactLocalStorage.set('type',res?.data?.typeAccount );
         reactLocalStorage.set('user',username)
         setSuccess(true);
+        setType(res?.data?.typeAccount);
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -39,7 +41,9 @@ const Login = () => {
 
   return (
     <>
-      {success && <Navigate to="/student" />}
+      {success && type === 'sv'  && <Navigate to="/student" />}
+      {success && type === 'gv' && <Navigate to="/teacher" />}
+      {success && type === 'ph' && <Navigate to="/parent" />}
       <div className="signin-wrap lg:w-1/3 md:w-1/2 w-[90%] mx-auto flex flex-col items-center bg-slate-200 rounded mt-20 md:px-16 px-2 py-5 gap-4">
         <form onSubmit={handleLogin} className='flex flex-col gap-5 w-full'>
           <p className="text-2xl mb-4 text-center">Login</p>
@@ -49,7 +53,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             size="small"
-            fullWidths
+            fullWidth
             required
             aria-label="Username"
           />

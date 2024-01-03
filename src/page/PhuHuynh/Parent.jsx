@@ -4,11 +4,11 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Rightbar from '../../components/Rightbar';
 import axios from 'axios';
-import StudentHome from './StudentHome';
 import { Navigate, Outlet } from 'react-router-dom';
 import { getStudentData } from '../../utils/getData';
 import { reactLocalStorage } from 'reactjs-localstorage';
-const Student = () => {
+
+const Parent = () => {
   const [loggedInUserId, setLoggedInUserId] = useState(reactLocalStorage.get('user'));
   const type = reactLocalStorage.get('type');
   const [correct, setCorrect] = useState(!!loggedInUserId);
@@ -18,8 +18,8 @@ const Student = () => {
   console.log(type);
   const fetchData = async () => {
     try {
-      const studentData = await getStudentData(loggedInUserId);
-      setData(studentData);
+      const ParentData = await getStudentData(loggedInUserId);
+      setData(TeacherData);
     } catch (error) {
       // Handle error as needed
     }
@@ -42,12 +42,12 @@ const Student = () => {
     return <Navigate to={'/login'} />;
   }
 
-  if (correct && type === 'sv') {
+  if (correct && type === 'ph') {
     return (
       <>
         <Box>
-          <Navbar id={data?.TenSV?.[0]} type={type}/>
-          <Stack direction={`row`} spacing={2} >
+          <Navbar id={data?.TenSV?.[0]} />
+          <Stack direction={`row`} spacing={2}>
             <Sidebar type={type} id={reactLocalStorage.get('user')}/>
             <div className="flex flex-col lg:w-[50%]  w-full items-center h-screen">
               <Outlet />
@@ -60,4 +60,4 @@ const Student = () => {
   }
 };
 
-export default Student;
+export default Parent;

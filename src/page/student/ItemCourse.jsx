@@ -3,7 +3,7 @@ import React from 'react'
 const ItemCourse = ({item}) => {
   return (
    <>
-    <div className=' border-sky-600 border-2 flex md:w-[90%]  w-full gap-2 rounded overflow-hidden hover:shadow-xl duration-100'>
+    <div className=' border-sky-600 border-2 flex md:w-[90%] bg-white w-full gap-2 rounded overflow-hidden hover:shadow-xl duration-100'>
         <div className='w-2/5 '>
             <img src="/chip.jpg" alt="" width={300} height={300} className='object-fit'/>
         </div>
