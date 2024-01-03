@@ -46,7 +46,7 @@ const Student = () => {
     return (
       <>
         <Box>
-          <Navbar id={data?.TenSV?.[0]} type={type}/>
+          <Navbar id={loggedInUserId} name={data?.TenSV?.[0]} type={type}/>
           <Stack direction={`row`} spacing={2} >
             <Sidebar type={type} id={reactLocalStorage.get('user')}/>
             <div className="flex flex-col lg:w-[50%]  w-full items-center h-screen">

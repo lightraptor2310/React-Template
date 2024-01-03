@@ -51,7 +51,7 @@ const IconBox = styled(Box)(({ theme }) => ({
     display: "flex",
   },
 }));
-const Navbar = ({id,type}) => {
+const Navbar = ({name,id,type}) => {
   const [open,setOpen] = useState();
   
   
@@ -60,7 +60,7 @@ const Navbar = ({id,type}) => {
   }
   return (
     <>
-      <NavbarMenu id={id} toggle={toggle}/>
+      <NavbarMenu name={name} toggle={toggle}/>
       <SideBarMenu open={open} toggle={toggle} type={type} id={id}/>
     </>
   )
@@ -197,7 +197,7 @@ const SideBarMenu = ({open,toggle,type,id}) => {
     </div>
   )
 }
-const NavbarMenu = ({id,toggle}) => {
+const NavbarMenu = ({name,toggle}) => {
     const [openMenu, setOpenMenu] = useState(false)
   return (
     <AppBar position="sticky">
@@ -224,7 +224,7 @@ const NavbarMenu = ({id,toggle}) => {
             sx={{ width: "30px", height: "30px" }}
             src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t39.30808-6/397965008_3709908259254274_3900916591313818123_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ZQt8JBW205cAX80i25Q&_nc_ht=scontent.fsgn16-1.fna&oh=00_AfCuUEz_LPFkNbaN05nZW7WScoKbZwmkMJmrTSI2hSjATg&oe=6554313B"
           />
-          <Typography variant="span">{id}</Typography>
+          <Typography variant="span">{name}</Typography>
         </IconBox>
       </StyledToolbar>
       <Menu
