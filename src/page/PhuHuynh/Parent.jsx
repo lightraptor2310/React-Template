@@ -5,7 +5,7 @@ import Sidebar from '../../components/Sidebar';
 import Rightbar from '../../components/Rightbar';
 import axios from 'axios';
 import { Navigate, Outlet } from 'react-router-dom';
-import { getStudentData } from '../../utils/getData';
+import { getParent } from '../../utils/getData';
 import { reactLocalStorage } from 'reactjs-localstorage';
 
 const Parent = () => {
@@ -18,13 +18,13 @@ const Parent = () => {
   console.log(type);
   const fetchData = async () => {
     try {
-      const ParentData = await getStudentData(loggedInUserId);
-      setData(TeacherData);
+      const ParentData = await getParent(loggedInUserId);
+      setData(ParentData);
     } catch (error) {
       // Handle error as needed
     }
   };
-
+  console.log(data);
   useEffect(() => {
     // Ensure that correct is updated before calling fetchData
     if (correct) {
@@ -46,7 +46,7 @@ const Parent = () => {
     return (
       <>
         <Box>
-          <Navbar id={data?.TenSV?.[0]} />
+          <Navbar name={data?.["Ten phu huynh"]} type={type} id={loggedInUserId}/>
           <Stack direction={`row`} spacing={2}>
             <Sidebar type={type} id={reactLocalStorage.get('user')}/>
             <div className="flex flex-col lg:w-[50%]  w-full items-center h-screen">

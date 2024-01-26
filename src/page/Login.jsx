@@ -5,6 +5,9 @@ import { Link } from '@mui/material';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { address } from '../utils/getData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,7 +19,7 @@ const Login = () => {
     e.preventDefault(); // Prevent default form submission
 
     try {
-      const res = await axios.post('https://flask-database.vercel.app/login', {
+      const res = await axios.post(`${address}/login`, {
         id: username,
         password: password,
       }, {
@@ -32,6 +35,7 @@ const Login = () => {
         reactLocalStorage.set('user',username)
         setSuccess(true);
         setType(res?.data?.typeAccount);
+        toast("Wow so easy !");
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -72,9 +76,6 @@ const Login = () => {
             Login
           </Button>
         </form>
-        <Link href="/signup" variant="body2">
-          {"Don't have an account? Sign Up"}
-        </Link>
       </div>
     </>
   );

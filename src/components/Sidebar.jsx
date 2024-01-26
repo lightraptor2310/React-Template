@@ -54,18 +54,13 @@ const Sidebar = ({type,id}) => {
       icon: <Home />
     },
     {
-      text: "Quản Lí Môn Học",
-      link: `subject/${id}`,
-      icon: <Article />
-    },
-    {
       text: "Cài Đặt",
       link: "setting",
       icon: <Settings />
     },
     {
       text: "Thông Tin Cá Nhân",
-      link: `${id}`,
+      link: `info`,
       icon: <Person />
     },
   ]

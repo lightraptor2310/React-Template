@@ -19,6 +19,9 @@ import Person from './page/student/Person.jsx'
 import TeacherHome from './page/GiangVien/TeacherHome.jsx'
 import TeacherInfo from './page/GiangVien/TeacherInfo.jsx'
 import StudentSetting from './page/student/StudentSetting.jsx'
+import TeacherSubjectDetail from './page/GiangVien/TeacherSubjectDetail.jsx'
+import ParentHome from './page/PhuHuynh/ParentHome.jsx'
+import ParentSubjectDetail from './page/PhuHuynh/ParentSubjectDetail.jsx'
 
 const router = createBrowserRouter([
   {
@@ -73,9 +76,14 @@ const router = createBrowserRouter([
         path: "/teacher",
         element: <TeacherHome/>,
       }
-      , 
+      ,
       {
         path: "/teacher/:id",
+        element: <TeacherSubjectDetail />
+      }
+      ,
+      {
+        path: "/teacher/info",
         element: <TeacherInfo/>,
       }
     ]
@@ -87,9 +95,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/parent",
-        element: <TeacherHome/>,
+        element: <ParentHome />,
+      }, 
+      {
+        path: "/parent/subject/:id",
+        element: <ParentSubjectDetail/>,
       }
-      , 
+      ,
       {
         path: "/parent/:id",
         element: <TeacherInfo/>,

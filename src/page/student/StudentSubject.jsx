@@ -20,7 +20,7 @@ const StudentSubject = () => {
     }, []);
   return (
     <>
-        <p className='text-3xl p-3 bg-white rounded-md shadow-md mt-3'>Danh sách môn học của {param.id}</p>
+        <p className='text-3xl p-3 bg-white rounded-md shadow-md mt-3'>Danh sách môn học</p>
         <ListCourse list={listSubject} id={param.id}/>
     </>
   )
