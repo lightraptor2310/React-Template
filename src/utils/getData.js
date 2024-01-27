@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const address = 'http://192.168.89.74:5000'
+export const address = 'http://192.168.131.74:5000'
 export const getStudentData = async (userId) => {
     try {
       const response = await axios.get(`${address}/home/${userId}`);

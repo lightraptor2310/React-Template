@@ -17,7 +17,7 @@ const ParentHome = () => {
 
   return (
     <>
-    <ListSubjectParent list={data?.['Danh sach mon hoc']}/>
+    <ListSubjectParent list={data?.['Danh sach mon hoc']} id={data?.['Thong tin sinh vien'][0]?.MaSV}/>
     </>
   )
 }

@@ -98,7 +98,7 @@ const router = createBrowserRouter([
         element: <ParentHome />,
       }, 
       {
-        path: "/parent/subject/:id",
+        path: "/parent/subject/:id/:id2",
         element: <ParentSubjectDetail/>,
       }
       ,
